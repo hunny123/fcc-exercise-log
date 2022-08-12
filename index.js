@@ -44,12 +44,9 @@ app.get(`/api/users/:userId/logs`,async(req,res)=>{
  const exercises = await Exercise.find({...filters}).limit(limit)
  const shapedExercise = exercises.map(item=>
         {return{description:item.description,duration:item.duration,date:new Date(item.date).toDateString()}})
- res.json({username:user.username,_id:userId,count:shapedExercise.length,logs:shapedExercise})
+ res.json({username:user.username,_id:userId,count:shapedExercise.length,log:shapedExercise})
   
 })
-
-
-
 
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log('Your app is listening on port ' + listener.address().port)
