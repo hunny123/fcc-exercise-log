@@ -33,6 +33,7 @@ app.post('/api/users/:userId/exercises',async(req,res)=>{
  const date = req.body.date ? new Date(req.body.date).toDateString():new Date().toDateString()
  const newExercise = new Exercise({...body,username:user.username,userId,date})
  const exercise = await newExercise.save()
+ delete exercise._doc.userId
  res.json({...exercise._doc,date:new Date(exercise.date).toDateString(),_id:userId})
 })
 app.get(`/api/users/:userId/logs`,async(req,res)=>{
